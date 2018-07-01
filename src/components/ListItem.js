@@ -1,21 +1,14 @@
 import React, { Component } from "react";
 
 class ListItem extends Component {
- constructor(props) {
-   super(props);
-   this.state = {
-    todo: [
-        {id:1, name: "shopping", complete: false},
-        {id:2, name: "swiming", comolete: false}
-    ]
- };
-}
+
  render() {
    return (
        <div>
       
-       {this.state.todo.map(item => (
+       {this.props.todos.map((item, index) => (
         <div
+        
         key={item.id}
         style={{
           backgroundColor: "#fefefe",
@@ -29,8 +22,11 @@ class ListItem extends Component {
           paddingBottom: 19
         }}
       >
-        <input type="checkbox" />
-        {item.name}
+        <input 
+        onChange = {() => this.props.onCheckbox(index, item.id)}
+        type="checkbox" 
+        checked={item.complete}/>
+        {item.complete ? <s>{item.name}</s> : item.name}
       </div>
        ))}
    </div>
